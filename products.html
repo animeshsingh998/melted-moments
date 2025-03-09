@@ -6,6 +6,11 @@
     <title>Products - Melted Moments</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="assets/site.webmanifest">
 </head>
 <body>
     <nav class="navbar">
@@ -20,6 +25,9 @@
             <li><a href="products.html" class="active">Products</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart <span class="cart-count" id="cart-count">0</span></a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="sales.html">Sales</a></li>
         </ul>
     </nav>
 
@@ -38,52 +46,61 @@
 
         <div class="products-grid">
             <div class="product-item" data-category="truffles">
-                <img src="https://images.unsplash.com/photo-1526081347589-7fa3cb41b4b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dark Chocolate Truffles">
-                <h3>Dark Chocolate Truffles</h3>
-                <p>Rich and smooth dark chocolate truffles</p>
-                <span class="price">$12.99</span>
-                <button class="add-to-cart">Add to Cart</button>
+                <img src="assets/1.jpeg" alt="Dark Chocolate Truffles">
+                <h3>Chocolate Truffles</h3>
+                <p>Rich and smooth chocolate truffles</p>
+                <span class="price">79₹</span>
+                <button class="add-to-cart" 
+                    data-name="Dark Chocolate Truffles"
+                    data-price="79"
+                    data-image="assets/1.jpeg"
+                    data-description="Rich and smooth chocolate truffles">
+                    Add to Cart
+                </button>
             </div>
 
             <div class="product-item" data-category="bars">
-                <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dark Chocolate Bar">
-                <h3>70% Dark Chocolate Bar</h3>
-                <p>Single origin dark chocolate bar</p>
-                <span class="price">$8.99</span>
-                <button class="add-to-cart">Add to Cart</button>
+                <img src="assets/2.jpeg" alt="Dark Chocolate Bar">
+                <h3>Chocolate Truffles</h3>
+                <p>Rich and smooth chocolate truffles</p>
+                <span class="price">79₹</span>
+                <button class="add-to-cart" 
+                    data-name="70% Dark Chocolate Bar"
+                    data-price="79"
+                    data-image="assets/2.jpeg"
+                    data-description="Rich and smooth chocolate truffles">
+                    Add to Cart
+                </button>
             </div>
 
             <div class="product-item" data-category="pralines">
-                <img src="https://images.unsplash.com/photo-1548907040-4d42b61be2b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Hazelnut Pralines">
-                <h3>Hazelnut Pralines</h3>
-                <p>Classic hazelnut filled chocolates</p>
-                <span class="price">$14.99</span>
-                <button class="add-to-cart">Add to Cart</button>
+                <img src="assets/3.jpeg" alt="Hazelnut Pralines">
+                <h3>Chocolate Truffles</h3>
+                <p>Rich and smooth chocolate truffles</p>
+                <span class="price">79₹</span>
+                <button class="add-to-cart" 
+                    data-name="Hazelnut Pralines"
+                    data-price="79"
+                    data-image="assets/3.jpeg"
+                    data-description="Rich and smooth chocolate truffles">
+                    Add to Cart
+                </button>
             </div>
 
             <div class="product-item" data-category="truffles">
-                <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Raspberry Truffles">
-                <h3>Raspberry Truffles</h3>
-                <p>Dark chocolate truffles with raspberry filling</p>
-                <span class="price">$13.99</span>
-                <button class="add-to-cart">Add to Cart</button>
+                <img src="assets/4.jpeg" alt="Raspberry Truffles">
+                <h3>Chocolate Truffles</h3>
+                <p>Rich and smooth chocolate truffles</p>
+                <span class="price">79₹</span>
+                <button class="add-to-cart" 
+                    data-name="Raspberry Truffles"
+                    data-price="79"
+                    data-image="assets/4.jpeg"
+                    data-description="Rich and smooth chocolate truffles">
+                    Add to Cart
+                </button>
             </div>
 
-            <div class="product-item" data-category="bars">
-                <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Milk Chocolate Bar">
-                <h3>Creamy Milk Chocolate Bar</h3>
-                <p>Smooth milk chocolate bar</p>
-                <span class="price">$7.99</span>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-
-            <div class="product-item" data-category="pralines">
-                <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Assorted Pralines">
-                <h3>Assorted Pralines</h3>
-                <p>Selection of our finest pralines</p>
-                <span class="price">$16.99</span>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
         </div>
     </section>
 
@@ -91,13 +108,13 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Contact Us</h4>
-                <p>Email: info@meltedmoments.com</p>
-                <p>Phone: (555) 123-4567</p>
+                <p>Email: Meltedmomentscreations@gmail.com</p>
+                <p>Phone: +91 9104135133</p>
             </div>
             <div class="footer-section">
                 <h4>Follow Us</h4>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/meltedmomentscreations?igsh=anl6MWFkaTlqMm5t" target="__blank"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
@@ -116,5 +133,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
 </body>
 </html> 

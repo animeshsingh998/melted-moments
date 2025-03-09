@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Melted Moments</title>
+    <title>Order History - Melted Moments</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -23,24 +23,21 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="products.html">Products</a></li>
-            <li><a href="about.html" class="active">About Us</a></li>
+            <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="cart.html">Cart <span class="cart-count" id="cart-count">0</span></a></li>
-            <li><a href="orders.html">Orders</a></li>
+            <li><a href="orders.html" class="active">Orders</a></li>
             <li><a href="sales.html">Sales</a></li>
         </ul>
     </nav>
 
-    <section class="about-section">
-        <div class="about-content">
-            <h1>Our Story</h1>
-            <p>Melted Moments began as an innovative college project at GLS University School of Management, born from our passion for artisanal chocolate-making and entrepreneurship. What started as an academic endeavor has blossomed into a creative venture that allows us to explore the fascinating world of chocolate crafting while learning the fundamentals of running a business. As students pursuing IMBA, we saw an opportunity to combine our educational journey with our love for creating delightful chocolate experiences.</p>
-            
-            <h2>Our Mission</h2>
-            <p>We strive to create moments of pure joy through our carefully crafted chocolates, using only the finest ingredients sourced from sustainable farms around the world.</p>
-            
-            <h2>Our Process</h2>
-            <p>Each piece of chocolate is handcrafted with attention to detail, ensuring the perfect balance of flavors and textures. We take pride in our artisanal approach and commitment to quality.</p>
+    <section class="orders-section">
+        <div class="orders-header">
+            <h1>Order History</h1>
+            <p>View all your previous orders</p>
+        </div>
+        <div class="orders-container" id="orders-list">
+            <!-- Orders will be dynamically added here -->
         </div>
     </section>
 
@@ -73,5 +70,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/orders.js"></script>
 </body>
 </html> 

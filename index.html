@@ -6,16 +6,15 @@
     <title>Melted Moments - Luxury Chocolates</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="assets/site.webmanifest">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">Melted Moments</div>
-        <div class="nav-middle">
-            <div class="search-bar">
-                <input type="text" placeholder="Search products...">
-                <button type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
         <div class="menu-toggle" id="mobile-menu">
             <span></span>
             <span></span>
@@ -23,9 +22,12 @@
         </div>
         <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="products.html">Products</a></li>
+            <li><a href="products.html" >Products</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart <span class="cart-count" id="cart-count">0</span></a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="sales.html">Sales</a></li>
         </ul>
     </nav>
 
@@ -41,19 +43,36 @@
         <h2>Featured Products</h2>
         <div class="product-grid">
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1526081347589-7fa3cb41b4b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chocolate Truffles">
-                <h3>Luxury Truffles</h3>
-                <p>Handcrafted dark chocolate truffles</p>
+                <img src="assets/1.jpeg" alt="Dark Chocolate Truffles">
+                <h3>Chocolate Truffles</h3>
+                <p>Rich and smooth chocolate truffles</p>
             </div>
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pralines">
-                <h3>Classic Pralines</h3>
+                <h3>Classic Pralines (Coming soon)</h3>
                 <p>Smooth hazelnut filled chocolates</p>
             </div>
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chocolate Bars">
-                <h3>Artisan Bars</h3>
+                <h3>Artisan Bars (Coming soon)</h3>
                 <p>Single origin chocolate bars</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="section-header">
+            <h2>A Preview of our product</h2>
+        </div>
+        <div class="video-container">
+            <video id="product-video" controls>
+                <source src="assets/product.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay">
+                <button id="play-btn" class="play-button">
+                    <i class="fas fa-play"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -87,34 +106,6 @@
         </div>
     </section>
 
-    <section class="chocolate-process">
-        <div class="section-header">
-            <h2>Our Process</h2>
-            <p>From Bean to Bar: Our Chocolate Making Journey</p>
-        </div>
-        <div class="process-timeline">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3>Bean Selection</h3>
-                <p>Carefully selecting premium cocoa beans from sustainable farms</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3>Roasting</h3>
-                <p>Perfectly roasted to bring out the finest flavors</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3>Crafting</h3>
-                <p>Handcrafted by expert chocolatiers with passion</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <h3>Quality Check</h3>
-                <p>Rigorous testing to ensure perfect taste and texture</p>
-            </div>
-        </div>
-    </section>
 
     <section class="testimonials">
         <div class="section-header">
@@ -126,7 +117,7 @@
                 <div class="quote"><i class="fas fa-quote-left"></i></div>
                 <p>"The finest chocolates I've ever tasted. Each piece is a work of art!"</p>
                 <div class="customer-info">
-                    <h4>Sarah Johnson</h4>
+                    <h4>Nishit Pandya</h4>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -140,7 +131,7 @@
                 <div class="quote"><i class="fas fa-quote-left"></i></div>
                 <p>"Perfect gift for any occasion. The presentation is as amazing as the taste."</p>
                 <div class="customer-info">
-                    <h4>Michael Brown</h4>
+                    <h4>Yauvan Patel</h4>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -156,29 +147,29 @@
     <section class="instagram-feed">
         <div class="section-header">
             <h2>Follow Us on Instagram</h2>
-            <p>@meltedmoments</p>
+            <p>@meltedmomentscreations</p>
         </div>
         <div class="instagram-grid">
-            <a href="#" class="instagram-item">
-                <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Instagram post">
+            <a href="https://www.instagram.com/p/DFLH5YnTBE1/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="instagram-item">
+                <img src="assets/p1.png" alt="Instagram post">
                 <div class="overlay">
                     <i class="fab fa-instagram"></i>
                 </div>
             </a>
-            <a href="#" class="instagram-item">
-                <img src="https://images.unsplash.com/photo-1493925410384-84f842e616fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Instagram post">
+            <a href="https://www.instagram.com/p/DG98yCqzVC4/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="instagram-item">
+                <img src="assets/p2.png" alt="Instagram post">
                 <div class="overlay">
                     <i class="fab fa-instagram"></i>
                 </div>
             </a>
-            <a href="#" class="instagram-item">
-                <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Instagram post">
+            <a href="https://www.instagram.com/p/DG431C8oNow/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="instagram-item">
+                <img src="assets/p3.png" alt="Instagram post">
                 <div class="overlay">
                     <i class="fab fa-instagram"></i>
                 </div>
             </a>
-            <a href="#" class="instagram-item">
-                <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Instagram post">
+            <a href="https://www.instagram.com/p/DG98oaCTAv7/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="instagram-item">
+                <img src="assets/p4.png" alt="Instagram post">
                 <div class="overlay">
                     <i class="fab fa-instagram"></i>
                 </div>
@@ -190,13 +181,13 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Contact Us</h4>
-                <p>Email: info@meltedmoments.com</p>
-                <p>Phone: (555) 123-4567</p>
+                <p>Email: Meltedmomentscreations@gmail.com</p>
+                <p>Phone: +91 9104135133</p>
             </div>
             <div class="footer-section">
                 <h4>Follow Us</h4>
                 <div class="social-links">
-                    <a href="https://instagram.com" target="__blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/meltedmomentscreations?igsh=anl6MWFkaTlqMm5t" target="__blank"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>

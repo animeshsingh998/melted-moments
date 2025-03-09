@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Melted Moments</title>
+    <title>Sales Dashboard - Melted Moments</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -23,24 +23,71 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="products.html">Products</a></li>
-            <li><a href="about.html" class="active">About Us</a></li>
+            <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="cart.html">Cart <span class="cart-count" id="cart-count">0</span></a></li>
             <li><a href="orders.html">Orders</a></li>
-            <li><a href="sales.html">Sales</a></li>
+            <li><a href="sales.html" class="active">Sales</a></li>
         </ul>
     </nav>
 
-    <section class="about-section">
-        <div class="about-content">
-            <h1>Our Story</h1>
-            <p>Melted Moments began as an innovative college project at GLS University School of Management, born from our passion for artisanal chocolate-making and entrepreneurship. What started as an academic endeavor has blossomed into a creative venture that allows us to explore the fascinating world of chocolate crafting while learning the fundamentals of running a business. As students pursuing IMBA, we saw an opportunity to combine our educational journey with our love for creating delightful chocolate experiences.</p>
-            
-            <h2>Our Mission</h2>
-            <p>We strive to create moments of pure joy through our carefully crafted chocolates, using only the finest ingredients sourced from sustainable farms around the world.</p>
-            
-            <h2>Our Process</h2>
-            <p>Each piece of chocolate is handcrafted with attention to detail, ensuring the perfect balance of flavors and textures. We take pride in our artisanal approach and commitment to quality.</p>
+    <section class="sales-section">
+        <div class="sales-header">
+            <h1>Sales Dashboard</h1>
+            <p>Track your business performance</p>
+            <button id="reset-data" class="reset-button">
+                <i class="fas fa-trash-alt"></i> Reset All Data
+            </button>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Total Orders</h3>
+                <p id="total-orders">0</p>
+            </div>
+            <div class="metric-card">
+                <i class="fas fa-box"></i>
+                <h3>Total Items Sold</h3>
+                <p id="total-items">0</p>
+            </div>
+            <div class="metric-card">
+                <i class="fas fa-rupee-sign"></i>
+                <h3>Total Revenue</h3>
+                <p id="total-revenue">₹0</p>
+            </div>
+            <div class="metric-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Average Order Value</h3>
+                <p id="avg-order-value">₹0</p>
+            </div>
+        </div>
+
+        <div class="sales-details">
+            <div class="product-performance">
+                <h2>Product Performance</h2>
+                <div class="table-container">
+                    <table id="product-table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Units Sold</th>
+                                <th>Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="recent-orders">
+                <h2>Recent Orders</h2>
+                <div id="recent-orders-list">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
         </div>
     </section>
 
@@ -73,5 +120,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/sales.js"></script>
 </body>
 </html> 

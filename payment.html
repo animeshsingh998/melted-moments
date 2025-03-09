@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Melted Moments</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="assets/site.webmanifest">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Melted Moments</div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart <span class="cart-count" id="cart-count">0</span></a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="sales.html">Sales</a></li>
+        </ul>
+    </nav>
+
+    <section class="payment-section">
+        <div class="payment-container">
+            <div class="order-summary-box">
+                <h2>Order Summary</h2>
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Total Items:</span>
+                        <span id="total-items">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Amount:</span>
+                        <span id="total-amount">₹0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-box">
+                <h2>Payment Method</h2>
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <input type="radio" id="cod" name="payment-type" value="cod" checked>
+                        <label for="cod">
+                            <i class="fas fa-money-bill-wave"></i>
+                            Cash on Delivery
+                        </label>
+                    </div>
+                    <div class="payment-method">
+                        <input type="radio" id="online" name="payment-type" value="online">
+                        <label for="online">
+                            <i class="fas fa-credit-card"></i>
+                            Pay Online
+                        </label>
+                    </div>
+                </div>
+
+                <div id="card-details" class="card-details hidden">
+                    <div class="card-number-group">
+                        <label for="card-number">Card Number</label>
+                        <div class="card-input-box">
+                            <input type="text" id="card-number" maxlength="19" placeholder="1234 5678 9012 3456">
+                            <div class="card-icons">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fab fa-cc-amex"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-row">
+                        <div class="expiry-group">
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" maxlength="5" placeholder="MM/YY">
+                        </div>
+                        <div class="cvv-group">
+                            <label for="cvv">CVV</label>
+                            <input type="password" id="cvv" maxlength="3" placeholder="123">
+                        </div>
+                    </div>
+
+                    <div class="card-holder-group">
+                        <label for="card-holder">Card Holder Name</label>
+                        <input type="text" id="card-holder" placeholder="Name on card">
+                    </div>
+                </div>
+
+                <div class="delivery-address">
+                    <h3>Delivery Address</h3>
+                    <div class="address-input-group">
+                        <textarea id="address" rows="3" placeholder="Enter your full delivery address"></textarea>
+                        <button id="get-location" class="location-button">
+                            <i class="fas fa-map-marker-alt"></i> Use Current Location
+                        </button>
+                    </div>
+                    <div id="location-status" class="location-status hidden">
+                        <i class="fas fa-spinner fa-spin"></i> Getting your location...
+                    </div>
+                </div>
+
+                <button id="pay-button" class="pay-button">
+                    <span id="button-text">Pay Now</span>
+                    <div class="spinner hidden" id="spinner"></div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: Meltedmomentscreations@gmail.com</p>
+                <p>Phone: +91 9104135133</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/meltedmomentscreations?igsh=anl6MWFkaTlqMm5t" target="__blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Melted Moments. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html> 
