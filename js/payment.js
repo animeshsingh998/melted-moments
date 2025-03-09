@@ -1,3 +1,5 @@
+import { dbOperations } from './supabase-config.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const cardDetails = document.getElementById('card-details');
     const paymentMethods = document.getElementsByName('payment-type');
@@ -81,21 +83,33 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Get the order details
             const orderDetails = JSON.parse(localStorage.getItem('lastOrder'));
+            if (!orderDetails) {
+                throw new Error('No order details found');
+            }
             
-            // Store the order in orders history
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
-            orderDetails.address = address;
-            orderDetails.paymentMethod = paymentType;
-            orders.push(orderDetails);
-            localStorage.setItem('orders', JSON.stringify(orders));
+            // Ensure all required fields are present
+            const completeOrder = {
+                ...orderDetails,
+                address: address.trim(),
+                paymentMethod: paymentType,
+                date: new Date().toISOString()
+            };
+            
+            console.log('Submitting order:', completeOrder);
+            
+            // Save to Supabase
+            const savedOrder = await dbOperations.saveOrder(completeOrder);
+            console.log('Order saved:', savedOrder);
             
             // Clear the cart
             localStorage.removeItem('cart');
+            localStorage.removeItem('lastOrder');
             
             // Redirect to confirmation page
             window.location.href = 'order-confirmation.html';
         } catch (error) {
-            alert('Payment failed. Please try again.');
+            console.error('Payment error:', error);
+            alert('Payment failed. Error: ' + error.message);
             buttonText.classList.remove('hidden');
             spinner.classList.add('hidden');
             payButton.disabled = false;
