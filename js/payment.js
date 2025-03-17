@@ -87,19 +87,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('No order details found');
             }
             
-            // Ensure all required fields are present
-            const completeOrder = {
-                ...orderDetails,
+            // Format the order data
+            const orderData = {
+                orderId: orderDetails.orderId,
+                total: orderDetails.total,
+                items: orderDetails.items,
+                date: new Date().toISOString(),
                 address: address.trim(),
-                paymentMethod: paymentType,
-                date: new Date().toISOString()
+                paymentMethod: paymentType
             };
             
-            console.log('Submitting order:', completeOrder);
+            console.log('Submitting order:', orderData);
             
             // Save to Supabase
-            const savedOrder = await dbOperations.saveOrder(completeOrder);
-            console.log('Order saved:', savedOrder);
+            await dbOperations.saveOrder(orderData);
             
             // Clear the cart
             localStorage.removeItem('cart');
@@ -109,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'order-confirmation.html';
         } catch (error) {
             console.error('Payment error:', error);
-            alert('Payment failed. Error: ' + error.message);
+            alert('Payment failed. Please try again. Error: ' + error.message);
             buttonText.classList.remove('hidden');
             spinner.classList.add('hidden');
             payButton.disabled = false;

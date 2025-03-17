@@ -1549,4 +1549,192 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
         width: 100%;
         justify-content: center;
     }
+}
+
+/* All Orders Section Styles */
+.all-orders-section {
+    padding: 2rem 5%;
+    margin-top: 2rem;
+    background-color: var(--background-color);
+}
+
+.all-orders-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.order-detail-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.order-detail-header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1rem;
+}
+
+.order-detail-info h3 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.order-detail-info p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.order-items-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.order-item-detail {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.order-item-detail img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.item-info h4 {
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.item-price {
+    text-align: right;
+    font-weight: bold;
+}
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.delivery-info {
+    max-width: 60%;
+}
+
+.delivery-info strong {
+    color: var(--secondary-color);
+}
+
+.order-total {
+    text-align: right;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+@media screen and (max-width: 768px) {
+    .order-detail-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .order-item-detail {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .order-item-detail img {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+
+    .item-price {
+        text-align: center;
+    }
+
+    .order-footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .delivery-info {
+        max-width: 100%;
+    }
+
+    .order-total {
+        text-align: center;
+    }
+}
+
+/* Pagination Controls */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.page-btn {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #ccc;
+    color: #666;
+}
+
+.page-btn:disabled:hover {
+    background-color: var(--primary-color);
+    color: #666;
+}
+
+.page-info {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+@media screen and (max-width: 768px) {
+    .pagination-controls {
+        gap: 1rem;
+    }
+
+    .page-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
 } 

@@ -3,21 +3,26 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 const supabaseUrl = 'https://loqegpryaoceametorer.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvcWVncHJ5YW9jZWFtZXRvcmVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE1MjEwNDYsImV4cCI6MjA1NzA5NzA0Nn0.G-m8PhXxYmfQdwuB2c9qdWrbNqexUBdN4KnoIR_hHW8';
 
-// Create and export the Supabase client
-export const supabase = createClient(supabaseUrl, supabaseKey);
+// Create and export the Supabase client with additional options
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+    auth: {
+        autoRefreshToken: true,
+        persistSession: true
+    }
+});
 
 // Test connection and table existence
 (async () => {
     try {
         const { data, error } = await supabase
             .from('orders')
-            .select('*')
+            .select('count')
             .limit(1);
             
         if (error) {
             console.error('Supabase connection error:', error.message);
         } else {
-            console.log('Supabase connected and orders table exists');
+            console.log('Supabase connected successfully');
         }
     } catch (err) {
         console.error('Supabase test failed:', err.message);
@@ -32,40 +37,31 @@ export const dbOperations = {
                 throw new Error('No order data provided');
             }
 
-            console.log('Saving order:', orderData);
-
-            // Ensure all required fields are present
+            // Ensure all required fields are present and properly formatted
             const formattedOrder = {
-                orderId: orderData.orderId || `ORD${Date.now()}`,
-                total: orderData.total || '0',
-                items: JSON.stringify(orderData.items || []),
+                orderId: orderData.orderId,
+                total: orderData.total,
+                items: orderData.items, // Supabase will handle JSON conversion
                 date: new Date().toISOString(),
-                address: orderData.address || '',
-                paymentMethod: orderData.paymentMethod || 'cod'
+                address: orderData.address,
+                paymentMethod: orderData.paymentMethod
             };
 
-            console.log('Formatted order:', formattedOrder);
+            console.log('Attempting to save order:', formattedOrder);
 
             const { data, error } = await supabase
                 .from('orders')
-                .insert([formattedOrder])
-                .select('*')
-                .single();
+                .insert(formattedOrder);
 
             if (error) {
-                console.error('Supabase insert error:', error);
+                console.error('Database error:', error);
                 throw new Error(error.message);
             }
 
-            if (!data) {
-                throw new Error('No data returned after insert');
-            }
-
-            console.log('Order saved successfully:', data);
-            return data;
+            return formattedOrder;
         } catch (error) {
             console.error('Error in saveOrder:', error);
-            throw new Error(`Failed to save order: ${error.message}`);
+            throw error;
         }
     },
 

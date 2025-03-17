@@ -1,6 +1,11 @@
 import { dbOperations } from './supabase-config.js';
 import { supabase } from './supabase-config.js';
 
+// Add these variables at the top of your file
+let currentPage = 1;
+const ordersPerPage = 5;
+let totalOrders = 0;
+
 async function calculateSalesMetrics() {
     try {
         // Update sales data first
@@ -26,33 +31,49 @@ async function calculateSalesMetrics() {
                 </tr>
             `).join('');
 
-        // Get recent orders for display
-        const { data: orders } = await supabase
-            .from('orders')
-            .select('*')
-            .order('created_at', { ascending: false })
-            .limit(5);
+        try {
+            // Get recent orders for display - wrapped in separate try-catch
+            const { data: orders, error } = await supabase
+                .from('orders')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(5);
 
-        // Display recent orders
-        const recentOrdersList = document.getElementById('recent-orders-list');
-        recentOrdersList.innerHTML = orders.map(order => `
-            <div class="recent-order-card">
-                <div class="order-basic-info">
-                    <h4>Order ID: ${order.orderId}</h4>
-                    <p class="order-date">
-                        ${new Date(order.date).toLocaleDateString()}
-                    </p>
-                </div>
-                <div class="order-amount">
-                    <p>Total: ${order.total}</p>
-                    <p>Items: ${JSON.parse(order.items).reduce((sum, item) => sum + item.quantity, 0)}</p>
-                </div>
-            </div>
-        `).join('');
+            if (error) throw error;
+
+            // Display recent orders
+            const recentOrdersList = document.getElementById('recent-orders-list');
+            if (orders && orders.length > 0) {
+                recentOrdersList.innerHTML = orders.map(order => `
+                    <div class="recent-order-card">
+                        <div class="order-basic-info">
+                            <h4>Order ID: ${order.orderId}</h4>
+                            <p class="order-date">
+                                ${new Date(order.date).toLocaleDateString()}
+                            </p>
+                        </div>
+                        <div class="order-amount">
+                            <p>Total: ${order.total}</p>
+                            <p>Items: ${JSON.parse(order.items).reduce((sum, item) => sum + item.quantity, 0)}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                recentOrdersList.innerHTML = '<p class="no-orders">No recent orders</p>';
+            }
+        } catch (recentOrdersError) {
+            console.warn('Failed to load recent orders:', recentOrdersError);
+            document.getElementById('recent-orders-list').innerHTML = 
+                '<p class="error">Failed to load recent orders</p>';
+            // Don't throw the error, just handle it locally
+        }
 
     } catch (error) {
         console.error('Failed to load sales data:', error);
-        alert('Failed to load sales data. Please try again.');
+        // Only show alert if the main sales data failed to load
+        if (!document.getElementById('total-orders').textContent) {
+            alert('Failed to load sales data. Please try again.');
+        }
     }
 }
 
@@ -92,5 +113,106 @@ document.getElementById('reset-data').addEventListener('click', async () => {
     }
 });
 
+// Update the displayAllOrders function
+async function displayAllOrders(page = 1) {
+    try {
+        const orders = await dbOperations.getOrders();
+        const allOrdersList = document.getElementById('all-orders-list');
+        
+        if (!orders || orders.length === 0) {
+            allOrdersList.innerHTML = '<p class="no-orders">No orders found</p>';
+            document.querySelector('.pagination-controls').style.display = 'none';
+            return;
+        }
+
+        // Calculate pagination values
+        totalOrders = orders.length;
+        const totalPages = Math.ceil(totalOrders / ordersPerPage);
+        currentPage = Math.min(Math.max(1, page), totalPages);
+
+        // Get orders for current page
+        const startIndex = (currentPage - 1) * ordersPerPage;
+        const endIndex = Math.min(startIndex + ordersPerPage, totalOrders);
+        const pageOrders = orders.slice(startIndex, endIndex);
+
+        // Update page info
+        document.getElementById('page-info').textContent = `Page ${currentPage} of ${totalPages}`;
+
+        // Update pagination buttons
+        const prevBtn = document.getElementById('prev-page');
+        const nextBtn = document.getElementById('next-page');
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages;
+
+        // Display orders for current page
+        allOrdersList.innerHTML = pageOrders.map(order => `
+            <div class="order-detail-card">
+                <div class="order-detail-header">
+                    <div class="order-detail-info">
+                        <h3>Order ID</h3>
+                        <p>${order.orderId}</p>
+                    </div>
+                    <div class="order-detail-info">
+                        <h3>Order Date</h3>
+                        <p>${new Date(order.date).toLocaleDateString()}</p>
+                    </div>
+                    <div class="order-detail-info">
+                        <h3>Payment Method</h3>
+                        <p>${order.paymentMethod}</p>
+                    </div>
+                </div>
+
+                <div class="order-items-grid">
+                    ${order.items.map(item => `
+                        <div class="order-item-detail">
+                            <img src="${item.image}" alt="${item.name}">
+                            <div class="item-info">
+                                <h4>${item.name}</h4>
+                                <p>${item.description}</p>
+                                <p>Quantity: ${item.quantity}</p>
+                            </div>
+                            <div class="item-price">
+                                <p>₹${item.price * item.quantity}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="order-footer">
+                    <div class="delivery-info">
+                        <strong>Delivery Address:</strong>
+                        <p>${order.address}</p>
+                    </div>
+                    <div class="order-total">
+                        <p>Total: ${order.total}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+    } catch (error) {
+        console.error('Error displaying all orders:', error);
+        document.getElementById('all-orders-list').innerHTML = 
+            '<p class="error">Failed to load orders</p>';
+    }
+}
+
+// Add event listeners for pagination buttons
+document.getElementById('prev-page').addEventListener('click', () => {
+    if (currentPage > 1) {
+        displayAllOrders(currentPage - 1);
+        window.scrollTo({ top: document.querySelector('.all-orders-section').offsetTop, behavior: 'smooth' });
+    }
+});
+
+document.getElementById('next-page').addEventListener('click', () => {
+    const totalPages = Math.ceil(totalOrders / ordersPerPage);
+    if (currentPage < totalPages) {
+        displayAllOrders(currentPage + 1);
+        window.scrollTo({ top: document.querySelector('.all-orders-section').offsetTop, behavior: 'smooth' });
+    }
+});
+
 // Initialize sales dashboard
-calculateSalesMetrics(); 
+calculateSalesMetrics();
+displayAllOrders(1); 
